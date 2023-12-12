@@ -6,8 +6,6 @@ package cmd
 import (
 	"os"
 
-	"github.com/AP-Hunt/ficsit-exporter/pkg/prober"
-	"github.com/gin-gonic/gin"
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
 )
@@ -15,17 +13,8 @@ import (
 // rootCmd represents the base command when called without any subcommands
 var rootCmd = &cobra.Command{
 	Use:   "ficsit-exporter",
-	Short: "Exporter ficsit information using a multi-target exporter method",
-	Run: func(cmd *cobra.Command, args []string) {
-		prober := prober.New(cmd)
-
-		r := gin.Default()
-		r.GET("/probe", prober.Handle)
-		err := r.Run()
-		if err != nil {
-			panic(err)
-		}
-	},
+	Short: "Exporter ficsit information using a multi-target or single target exporter method",
+	Run:   exporterCmd.Run,
 }
 
 // Execute adds all child commands to the root command and sets flags appropriately.
