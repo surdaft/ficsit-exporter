@@ -6,7 +6,7 @@ import (
 	"net/http"
 	"net/url"
 
-	"github.com/AP-Hunt/FicsitRemoteMonitoringCompanion/m/v2/exporter"
+	"github.com/AP-Hunt/ficsit-exporter/pkg/exporter"
 	"github.com/prometheus/client_golang/prometheus"
 	"github.com/prometheus/client_golang/prometheus/promhttp"
 
