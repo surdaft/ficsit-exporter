@@ -5,6 +5,7 @@ import (
 	"net/http"
 
 	"github.com/AP-Hunt/ficsit-exporter/pkg/exporter"
+	. "github.com/onsi/gomega"
 )
 
 type FRMServerFake struct {
@@ -39,9 +40,9 @@ func NewFRMServerFake() *FRMServerFake {
 }
 
 func (f *FRMServerFake) Start() {
-
 	go func() {
-		f.server.ListenAndServe()
+		err := f.server.ListenAndServe()
+		Expect(err).ToNot(HaveOccurred())
 	}()
 }
 
@@ -93,6 +94,7 @@ func getStatsHandler(data any) func(w http.ResponseWriter, r *http.Request) {
 			return
 		}
 
-		w.Write(jsonBytes)
+		_, err = w.Write(jsonBytes)
+		Expect(err).ToNot(HaveOccurred())
 	}
 }

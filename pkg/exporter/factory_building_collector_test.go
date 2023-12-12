@@ -65,14 +65,16 @@ var _ = Describe("FactoryBuildingCollector", func() {
 
 	Describe("Machine item production metrics", func() {
 		It("records a metric with labels for the produced item name, machine type, and x, y, z coordinates", func() {
-			collector.Collect()
+			err := collector.Collect()
+			Expect(err).ToNot(HaveOccurred())
 			metric, err := getMetric(exporter.MachineItemsProducedPerMin, "Iron Ingot", "Smelter", "100", "200", "-300")
 			Expect(err).ToNot(HaveOccurred())
 			Expect(metric).ToNot(BeNil())
 		})
 
 		It("records the current production figure as the metric value", func() {
-			collector.Collect()
+			err := collector.Collect()
+			Expect(err).ToNot(HaveOccurred())
 
 			val, err := gaugeValue(exporter.MachineItemsProducedPerMin, "Iron Ingot", "Smelter", "100", "200", "-300")
 			Expect(err).ToNot(HaveOccurred())
@@ -81,7 +83,8 @@ var _ = Describe("FactoryBuildingCollector", func() {
 
 		Describe("when a machine has multiple outputs", func() {
 			It("records a metric per item", func() {
-				collector.Collect()
+				err := collector.Collect()
+				Expect(err).ToNot(HaveOccurred())
 
 				ironIngots, err := gaugeValue(exporter.MachineItemsProducedPerMin, "Iron Ingot", "Smelter", "100", "200", "-300")
 				Expect(err).ToNot(HaveOccurred())
@@ -96,14 +99,16 @@ var _ = Describe("FactoryBuildingCollector", func() {
 
 	Describe("Machine item production efficiency metrics", func() {
 		It("records a metric with labels for the produced item name, machine type, and x, y, z coordinates", func() {
-			collector.Collect()
+			err := collector.Collect()
+			Expect(err).ToNot(HaveOccurred())
 			metric, err := getMetric(exporter.MachineItemsProducedEffiency, "Iron Ingot", "Smelter", "100", "200", "-300")
 			Expect(err).ToNot(HaveOccurred())
 			Expect(metric).ToNot(BeNil())
 		})
 
 		It("records the current production efficiency as the metric value", func() {
-			collector.Collect()
+			err := collector.Collect()
+			Expect(err).ToNot(HaveOccurred())
 
 			val, err := gaugeValue(exporter.MachineItemsProducedEffiency, "Iron Ingot", "Smelter", "100", "200", "-300")
 			Expect(err).ToNot(HaveOccurred())
@@ -112,7 +117,8 @@ var _ = Describe("FactoryBuildingCollector", func() {
 
 		Describe("when a machine has multiple outputs", func() {
 			It("records a metric per item", func() {
-				collector.Collect()
+				err := collector.Collect()
+				Expect(err).ToNot(HaveOccurred())
 
 				ironIngots, err := gaugeValue(exporter.MachineItemsProducedEffiency, "Iron Ingot", "Smelter", "100", "200", "-300")
 				Expect(err).ToNot(HaveOccurred())

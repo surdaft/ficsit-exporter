@@ -20,12 +20,11 @@ func TestExporter(t *testing.T) {
 	})
 
 	AfterSuite(func() {
-		FRMServer.Stop()
+		err := FRMServer.Stop()
+		Expect(err).ToNot(HaveOccurred())
 	})
 	RunSpecs(t, "Exporter Suite")
 }
-
-func f(x float64) *float64 { return &x }
 
 func gaugeValue(gauge *prometheus.GaugeVec, labelValues ...string) (float64, error) {
 	var m = &dto.Metric{}
@@ -50,19 +49,8 @@ func getMetric(gauge *prometheus.GaugeVec, labelValues ...string) (*dto.Metric, 
 		return nil, nil
 	}
 
-	metric.Write(m)
+	err = metric.Write(m)
+	Expect(err).ToNot(HaveOccurred())
 
 	return m, nil
-}
-
-func hasLabelPair(metric *dto.Metric, key string, value string) bool {
-	for _, lbl := range metric.Label {
-		if lbl != nil {
-			if lbl.GetName() == key && lbl.GetValue() == value {
-				return true
-			}
-		}
-	}
-
-	return false
 }

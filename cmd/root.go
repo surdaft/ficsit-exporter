@@ -21,7 +21,10 @@ var rootCmd = &cobra.Command{
 
 		r := gin.Default()
 		r.GET("/probe", prober.Handle)
-		r.Run()
+		err := r.Run()
+		if err != nil {
+			panic(err)
+		}
 	},
 }
 

@@ -18,7 +18,7 @@ type VehicleDetails struct {
 	ForwardSpeed  float64  `json:"ForwardSpeed"`
 	AutoPilot     bool     `json:"AutoPilot"`
 	FuelType      string   `json:"FuelType"`
-	FuelInventory float64  `json"FuelInventory"`
+	FuelInventory float64  `json:"FuelInventory"`
 	PathName      string   `json:"PathName"`
 	DepartTime    time.Time
 	Departed      bool

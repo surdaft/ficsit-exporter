@@ -36,7 +36,8 @@ var _ = Describe("ProductionCollector", func() {
 
 	Describe("Current item production & consumption metrics", func() {
 		It("sets the 'items_produced_per_min' metric with the right labels", func() {
-			collector.Collect()
+			err := collector.Collect()
+			Expect(err).ToNot(HaveOccurred())
 
 			val, err := gaugeValue(exporter.ItemsProducedPerMin, "Iron Rod")
 			Expect(err).ToNot(HaveOccurred())
@@ -44,7 +45,8 @@ var _ = Describe("ProductionCollector", func() {
 		})
 
 		It("sets the 'items_consumed_per_min' metric with the right labels", func() {
-			collector.Collect()
+			err := collector.Collect()
+			Expect(err).ToNot(HaveOccurred())
 
 			val, err := gaugeValue(exporter.ItemsConsumedPerMin, "Iron Rod")
 			Expect(err).ToNot(HaveOccurred())
@@ -54,7 +56,8 @@ var _ = Describe("ProductionCollector", func() {
 
 	Describe("Item production & consumption efficiency metrics", func() {
 		It("sets the 'item_production_capacity_pc' metric with the right labels", func() {
-			collector.Collect()
+			err := collector.Collect()
+			Expect(err).ToNot(HaveOccurred())
 
 			val, err := gaugeValue(exporter.ItemProductionCapacityPercent, "Iron Rod")
 			Expect(err).ToNot(HaveOccurred())
@@ -62,7 +65,8 @@ var _ = Describe("ProductionCollector", func() {
 		})
 
 		It("sets the 'item_consumption_capacity_pc' metric with the right labels", func() {
-			collector.Collect()
+			err := collector.Collect()
+			Expect(err).ToNot(HaveOccurred())
 
 			val, err := gaugeValue(exporter.ItemConsumptionCapacityPercent, "Iron Rod")
 			Expect(err).ToNot(HaveOccurred())
@@ -72,7 +76,8 @@ var _ = Describe("ProductionCollector", func() {
 
 	Describe("Item production & consumption capacity metrics", func() {
 		It("sets the 'item_production_capacity_per_min' metric with the right labels", func() {
-			collector.Collect()
+			err := collector.Collect()
+			Expect(err).ToNot(HaveOccurred())
 
 			val, err := gaugeValue(exporter.ItemProductionCapacityPerMinute, "Iron Rod")
 			Expect(err).ToNot(HaveOccurred())
@@ -80,7 +85,8 @@ var _ = Describe("ProductionCollector", func() {
 		})
 
 		It("sets the 'item_consumption_capacity_per_min' metric with the right labels", func() {
-			collector.Collect()
+			err := collector.Collect()
+			Expect(err).ToNot(HaveOccurred())
 
 			val, err := gaugeValue(exporter.ItemConsumptionCapacityPerMinute, "Iron Rod")
 			Expect(err).ToNot(HaveOccurred())

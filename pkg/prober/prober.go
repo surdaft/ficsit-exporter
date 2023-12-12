@@ -83,12 +83,10 @@ func (p *Prober) probe(ctx context.Context, reg *prometheus.Registry, address *u
 
 	go func(e chan error, g *prometheus.Gauge) {
 		for {
-			select {
-			case <-e:
-				// log.Print(err)
-				gg := *g
-				gg.Set(0)
-			}
+			<-e
+
+			gg := *g
+			gg.Set(0)
 		}
 	}(errs, &g)
 }

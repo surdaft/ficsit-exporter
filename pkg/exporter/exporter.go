@@ -63,7 +63,11 @@ func NewPrometheusExporter(frmApiHost string) *PrometheusExporter {
 func (e *PrometheusExporter) Start() {
 	go e.collectorRunner.Start()
 	go func() {
-		e.server.ListenAndServe()
+		err := e.server.ListenAndServe()
+		if err != nil {
+			log.Print(err)
+		}
+
 		log.Println("stopping exporter")
 	}()
 }
